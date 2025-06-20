@@ -9,7 +9,7 @@
     "prisma": "^6.10.1"
   },
   "scripts": {
-  "build": "bun install && bun build src/index.ts --outdir dist",
+  "build": "bun install && bunx prisma generate && bun build src/index.ts --outdir dist",
   "start": "bun run dist/index.js"
 },
   "peerDependencies": {
