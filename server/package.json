@@ -9,9 +9,10 @@
     "prisma": "^6.10.1"
   },
   "scripts": {
-  "build": "bun install && bunx prisma generate && bun build src/index.ts --outdir dist",
-  "start": "bun run dist/index.js"
-},
+    "dev": "bun run --watch ./src/index.ts",
+    "start": "bun run ./src/index.ts",
+    "postinstall": "npx prisma generate --schema=src/prisma/schema.prisma"
+  },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
