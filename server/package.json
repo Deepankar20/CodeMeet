@@ -8,6 +8,10 @@
     "@types/express": "^5.0.3",
     "prisma": "^6.10.1"
   },
+  "scripts": {
+  "build": "bun build src/index.ts --outdir dist",
+  "start": "bun run dist/index.js"
+},
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
