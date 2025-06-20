@@ -6,6 +6,7 @@ import { use, useEffect, useRef, useState } from "react";
 import VideoPreview from "../_components/VideoPreview";
 import { useMediaStream } from "@/hooks/useMediaStream";
 import { usePeerConnection } from "@/hooks/usePeerConnection";
+import { useRouter } from "next/navigation";
 
 export default function Page({
   params,
@@ -18,7 +19,7 @@ export default function Page({
 
   const localVideoRef = useRef<HTMLVideoElement | null>(null);
   const pcRef = useRef<RTCPeerConnection | null>(null);
-
+  const router = useRouter();
   pcRef.current = usePeerConnection();
 
   const media = useMediaStream(localVideoRef, pcRef);
@@ -31,38 +32,41 @@ export default function Page({
     }
   }, [socket, preview]);
 
-  return preview ? (
-    <div>
-      <VideoPreview
-        audio={media.audio}
-        video={media.video}
-        toggleAudio={media.toggleAudio}
-        toggleVideo={media.toggleVideo}
-        videoRef={localVideoRef}
-        setPreview= {setPreview}
-      />
-     
-    </div>
-  ) : (
-    <div className="flex">
-      <div></div>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      {preview ? (
+        <div>
+          <VideoPreview
+            audio={media.audio}
+            video={media.video}
+            toggleAudio={media.toggleAudio}
+            toggleVideo={media.toggleVideo}
+            videoRef={localVideoRef}
+            setPreview={setPreview}
+          />
+        </div>
+      ) : (
+        <div className="flex">
+          <div></div>
 
-      <div className="w-2/3 h-screen border-r-1 border-white p-2">
-        <CodeEditor roomID={roomID} />
-      </div>
-      <div className="w-1/3 h-screen p-2">
-        <VideoChat
-          roomID={roomID}
-          audio={media.audio}
-          video={media.video}
-          toggleAudio={media.toggleAudio}
-          toggleVideo={media.toggleVideo}
-          localVideoRef={localVideoRef}
-          setStream={media.setStream}
-          stream={media.stream}
-          pcRef={pcRef}
-        />
-      </div>
+          <div className="w-2/3 h-screen border-r-1 border-white p-2">
+            <CodeEditor roomID={roomID} />
+          </div>
+          <div className="w-1/3 h-screen p-2">
+            <VideoChat
+              roomID={roomID}
+              audio={media.audio}
+              video={media.video}
+              toggleAudio={media.toggleAudio}
+              toggleVideo={media.toggleVideo}
+              localVideoRef={localVideoRef}
+              setStream={media.setStream}
+              stream={media.stream}
+              pcRef={pcRef}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

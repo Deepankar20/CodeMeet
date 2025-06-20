@@ -27,6 +27,10 @@ export default class SocketService {
       });
 
       socket.on("event:join", (data) => {
+        if (io.of("/").adapter.rooms.get(data.roomID)?.size == 2) {
+          socket.emit("event:room:full");
+          return;
+        }
         socket.join(data.roomID);
         console.log(io.of("/").adapter.rooms);
         const msg = `Successfully joined room : ${data.roomID}`;

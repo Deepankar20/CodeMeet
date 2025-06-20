@@ -21,11 +21,15 @@ class SocketService {
                 io.emit("msg:reply", data); // or socket.emit(...) for sender-only
             });
             socket.on("event:join", (data) => {
-                var _a;
+                var _a, _b;
+                if (((_a = io.of("/").adapter.rooms.get(data.roomID)) === null || _a === void 0 ? void 0 : _a.size) == 2) {
+                    socket.emit("event:room:full");
+                    return;
+                }
                 socket.join(data.roomID);
                 console.log(io.of("/").adapter.rooms);
                 const msg = `Successfully joined room : ${data.roomID}`;
-                const roomSize = ((_a = io.of("/").adapter.rooms.get(data.roomID)) === null || _a === void 0 ? void 0 : _a.size) || 0;
+                const roomSize = ((_b = io.of("/").adapter.rooms.get(data.roomID)) === null || _b === void 0 ? void 0 : _b.size) || 0;
                 if (roomSize == 2) {
                     socket.to(data.roomID).emit("event:start:call");
                 }

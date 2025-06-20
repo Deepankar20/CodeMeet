@@ -32,7 +32,6 @@ export default function VideoChat({
 
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
 
-
   useEffect(() => {
     if (!socket || !pcRef.current) return;
 
@@ -114,11 +113,40 @@ export default function VideoChat({
       }, 200);
     });
 
+    socket.on("event:room:full", () => {
+      if (pcRef.current) {
+        pcRef.current.close();
+        pcRef.current = null;
+      }
+
+      // Stop media tracks and release camera
+      if (localVideoRef.current) {
+        const stream = localVideoRef.current.srcObject as MediaStream | null;
+
+        if (stream) {
+          stream.getTracks().forEach((track) => {
+            track.stop(); // ⛔ This is what turns off the camera/mic
+          });
+
+          localVideoRef.current.srcObject = null;
+        }
+      }
+
+      // Clear any global references to the stream if you store it in state
+      setStream(null); // ✅ if you're using a useState for stream
+
+      // Hard reload to guarantee cleanup in all browsers (especially mobile/Chrome)
+      setTimeout(() => {
+        window.location.href = "/"; // hard navigate instead of router.push
+      }, 200);
+    });
+
     // Cleanup
     return () => {
       socket.off("event:offer:reply");
       socket.off("event:answer:reply");
       socket.off("event:ice-candidate:reply");
+      socket.off("event:room:full");
     };
   }, [socket]);
 
