@@ -109,7 +109,7 @@ export default function VideoChat({
 
       // Hard reload to guarantee cleanup in all browsers (especially mobile/Chrome)
       setTimeout(() => {
-        window.location.href = "/"; // hard navigate instead of router.push
+        window.location.href = "/home"; // hard navigate instead of router.push
       }, 200);
     });
 
@@ -137,7 +137,7 @@ export default function VideoChat({
 
       // Hard reload to guarantee cleanup in all browsers (especially mobile/Chrome)
       setTimeout(() => {
-        window.location.href = "/"; // hard navigate instead of router.push
+        window.location.href = "/home"; // hard navigate instead of router.push
       }, 200);
     });
 
@@ -187,7 +187,7 @@ export default function VideoChat({
 
     // Hard reload to guarantee cleanup in all browsers (especially mobile/Chrome)
     setTimeout(() => {
-      window.location.href = "/"; // hard navigate instead of router.push
+      window.location.href = "/home"; // hard navigate instead of router.push
     }, 200);
   }
 

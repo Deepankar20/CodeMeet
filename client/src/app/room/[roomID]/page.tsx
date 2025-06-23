@@ -33,7 +33,7 @@ export default function Page({
   }, [socket, preview]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="h-screen bg-[#1A1A1A]">
       {preview ? (
         <div>
           <VideoPreview

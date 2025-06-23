@@ -23,7 +23,7 @@ export default class SocketService {
       socket.on("message", (data) => {
         console.log("Got message from client:", data);
         console.log("Emitting msg:reply to all clients...");
-        io.emit("msg:reply", data); // or socket.emit(...) for sender-only
+        io.emit("msg:reply", data);
       });
 
       socket.on("event:join", (data) => {
@@ -62,6 +62,14 @@ export default class SocketService {
         const { type, length, position, text, roomID } = data;
 
         socket.to(roomID).emit("event:operation:reply", data);
+      });
+
+      socket.on("event:setLanguage", ({ language, roomID }) => {
+        socket.to(roomID).emit("event:setLanguage:reply", language);
+      });
+
+      socket.on("event:execute", ({ roomID, code }) => {
+        socket.to(roomID).emit("event:execute:reply", code);
       });
     });
   }

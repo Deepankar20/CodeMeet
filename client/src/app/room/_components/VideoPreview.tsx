@@ -14,7 +14,7 @@ export default function VideoPreview({
   setPreview: any;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center h-screen px-4 text-white bg-gray-900">
+    <div className="flex flex-col items-center justify-center h-screen text-white bg-[#000000]">
       <h1 className="text-3xl font-semibold mb-4">Preview Your Camera</h1>
       <p className="text-sm text-gray-300 mb-8">
         Adjust your audio/video settings before joining
