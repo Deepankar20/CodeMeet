@@ -1,4 +1,4 @@
-import { Server } from "socket.io";
+import { Server, Socket } from "socket.io";
 import { ILanguage, IOperationProps } from "../types/types";
 
 export default class SocketService {
@@ -17,7 +17,7 @@ export default class SocketService {
   public initListeners() {
     const io = this._io;
 
-    io.on("connect", (socket) => {
+    io.on("connect", (socket: Socket) => {
       console.log("New Socket connected : ", socket.id);
 
       socket.on("message", (data: string) => {
