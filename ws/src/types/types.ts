@@ -5,3 +5,13 @@ export type IOperationProps = {
   text: string;
   roomID: string;
 };
+
+export type ILanguage = {
+  name: string;
+  piston: {
+    id: string;
+    version: string;
+    fileName: string;
+  };
+  monacoId: string;
+}
