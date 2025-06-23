@@ -43,7 +43,9 @@ const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
   );
 
   useEffect(() => {
-    const _socket = io("http://localhost:8001");
+    console.log("this is URL", process.env.NEXT_PUBLIC_WS_URL);
+
+    const _socket = io(process.env.NEXT_PUBLIC_WS_URL as string);
     _socket.on("connect", () => {
       console.log("Socket connected:", _socket.id);
     });
