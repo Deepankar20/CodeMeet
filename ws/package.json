@@ -3,16 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "start": "node dist/index.js",
-  "build": "tsc",
-  "dev": "tsc-watch --onSuccess \"node dist/index.js\""
-}
-,
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "dev": "tsc-watch --onSuccess \"node dist/index.js\""
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/node": "^24.0.3",
+    "@types/socket.io": "^3.0.1",
     "nodemon": "^3.1.10",
     "typescript": "^5.8.3"
   },
@@ -21,7 +22,6 @@
     "tsc-watch": "^7.1.1"
   },
   "engines": {
-  "node": "20.x"
-}
-
+    "node": "20.x"
+  }
 }
