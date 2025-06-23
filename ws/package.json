@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon dist/index.js",
-    "build": "tsc -b",
-    "dev": "tsc-watch --onSuccess \"node dist/index.js\""
-  },
+  "start": "node dist/index.js",
+  "build": "tsc",
+  "dev": "tsc-watch --onSuccess \"node dist/index.js\""
+}
+,
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -18,5 +19,9 @@
   "dependencies": {
     "socket.io": "^4.8.1",
     "tsc-watch": "^7.1.1"
-  }
+  },
+  "engines": {
+  "node": "20.x"
+}
+
 }
